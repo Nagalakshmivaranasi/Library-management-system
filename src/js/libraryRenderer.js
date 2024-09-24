@@ -249,11 +249,11 @@ const createDropdown = (text, scrollToTop, parent) => {
   parent.appendChild(container);
 };
 
-const addBookForPreLoading = () => {
-  const divForPreloadAddBook = document.createElement('div');
-  divForPreloadAddBook.classList.add('add-Book');
-  divForPreloadAddBook.innerText = "The page is loading please wait.."
-}
+// const addBookForPreLoading = () => {
+//   const divForPreloadAddBook = document.createElement('div');
+//   divForPreloadAddBook.classList.add('add-Book');
+//   divForPreloadAddBook.innerText = "The page is loading please wait.."
+// }
 
 const showAddBookPopup = () => {
   // setTimeout(function addBookPopup() {
@@ -286,7 +286,7 @@ const showAddBookPopup = () => {
   // const divForPreloadAddBook = document.querySelector('.add-Book');
   // divForPreloadAddBook.remove();
   // },0);
-  // addBookForPreLoading();
+  addBookForPreLoading();
 };
 
 const createAndAppendAddBookButton = parent => {

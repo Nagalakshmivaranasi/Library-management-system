@@ -224,7 +224,7 @@ const mainFunction = () => {
     render();
     const divForLoading = document.querySelector('.loader-big');
     divForLoading.remove();
-  }, 15000);
+  }, 5000);
 }
 
 window.onload = mainFunction;
