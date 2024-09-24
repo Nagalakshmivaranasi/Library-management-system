@@ -280,7 +280,6 @@ const showAddBookPopup = () => {
 const createAndAppendAddBookButton = parent => {
   const text = 'Add new book';
   const className = 'add-book-button';
-  // const addBookButton = createButton(text, className, () => showAddBookPopup());
   const addBookButton = createButton(text, className);
   parent.appendChild(addBookButton);
 };

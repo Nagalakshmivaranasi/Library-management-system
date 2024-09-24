@@ -221,7 +221,7 @@ const mainFunction = () => {
     render();
     const divForLoading = document.querySelector('.loader-big');
     divForLoading.remove();
-  }, 10000);
+  }, 5000);
   const displayPopup = () => {
     const divForPopup = document.querySelector('.add-book');
     divForPopup.style.display = 'block';
