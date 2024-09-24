@@ -245,18 +245,10 @@ const createDropdown = (text, scrollToTop, parent) => {
     option.innerText = text;
     select.appendChild(option);
   });
-
   parent.appendChild(container);
 };
 
-// const addBookForPreLoading = () => {
-//   const divForPreloadAddBook = document.createElement('div');
-//   divForPreloadAddBook.classList.add('add-Book');
-//   divForPreloadAddBook.innerText = "The page is loading please wait.."
-// }
-
 const showAddBookPopup = () => {
-  // setTimeout(function addBookPopup() {
   const children = [
     createInputWithLabel({
       text: 'Name',
@@ -283,10 +275,6 @@ const showAddBookPopup = () => {
     handleAddBookSubmission()
   );
   showPopup(popup);
-  // const divForPreloadAddBook = document.querySelector('.add-Book');
-  // divForPreloadAddBook.remove();
-  // },0);
-  addBookForPreLoading();
 };
 
 const createAndAppendAddBookButton = parent => {
@@ -414,5 +402,7 @@ const groupAndRenderBooks = (scrollToTop = false) => {
 };
 
 const render = () => {
+  const divForPopup = document.querySelector('.add-book');
+  divForPopup.remove();
   groupAndRenderBooks();
 };

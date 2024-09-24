@@ -207,10 +207,7 @@ let libraryRenderer;
 const preLoading = () => {
   const divForLoading = document.createElement('div');
   divForLoading.classList.add('loader-big');
-  const loader = document.createElement('div');
-  loader.classList.add('loader');
-  divForLoading.appendChild(loader);
-  divForLoading.innerText = "The page is loading please wait..."
+  divForLoading.innerText = "Loading..."
   const mainTag = document.getElementById('main');
   mainTag.appendChild(divForLoading);
   return mainTag;
@@ -219,12 +216,23 @@ const preLoading = () => {
 const mainFunction = () => {
   preLoading();
   addHomePageActions();
-  setTimeout(function main(){
+  setTimeout(function main() {
     load(booksCSVData);
     render();
     const divForLoading = document.querySelector('.loader-big');
     divForLoading.remove();
-  }, 5000);
+  }, 10000);
+  const displayPopup = () => {
+    const divForPopup = document.querySelector('.add-book');
+    divForPopup.style.display = 'block';
+      setTimeout(function () {
+        divForPopup.style.display = 'none';
+      }, 2000);
+  };
+  const button = document.querySelector('.add-book-button');
+  button.addEventListener('click', displayPopup);
+  const dropDown = document.querySelector('.group-by-container');
+  dropDown.addEventListener('click', displayPopup);
 }
 
 window.onload = mainFunction;
