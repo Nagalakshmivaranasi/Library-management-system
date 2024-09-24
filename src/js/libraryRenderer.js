@@ -43,12 +43,6 @@ const generateOrGetGenreColor = genre => {
   return color;
 };
 
-const createGenre = genre => {
-  const tag = createPTag(genre, 'genre');
-  tag.style.backgroundColor = generateOrGetGenreColor(genre);
-  return tag;
-};
-
 const createButton = (text, className, callback) => {
   const button = document.createElement('button');
   button.classList.add(className);
@@ -61,13 +55,6 @@ const createAvailabilityBar = isAvailable => {
   const dot = document.createElement('div');
   dot.classList.add((isAvailable ? 'available' : 'unavailable') + '-bar');
   return dot;
-};
-
-const createPTag = (text, className) => {
-  const pTag = document.createElement('p');
-  className && pTag.classList.add(className);
-  pTag.innerText = text;
-  return pTag;
 };
 
 const createImageTag = (imageUrl, className) => {
@@ -90,6 +77,19 @@ const createDetailsElement = (key, value) => {
   container.appendChild(valueContainer);
 
   return container;
+};
+
+const createGenre = genre => {
+  const tag = createPTag(genre, 'genre');
+  tag.style.backgroundColor = generateOrGetGenreColor(genre);
+  return tag;
+};
+
+const createPTag = (text, className) => {
+  const pTag = document.createElement('p');
+  className && pTag.classList.add(className);
+  pTag.innerText = text;
+  return pTag;
 };
 
 const createInputWithLabel = ({ id, text, type }) => {
@@ -249,20 +249,14 @@ const createDropdown = (text, scrollToTop, parent) => {
   parent.appendChild(container);
 };
 
-const createAndAppendAddBookButton = parent => {
-  const text = 'Add new book';
-  const className = 'add-book-button';
-  const addBookButton = createButton(text, className, () => showAddBookPopup());
-  parent.appendChild(addBookButton);
-};
-
-const addHomePageActions = () => {
-  const container = document.getElementsByClassName('home-actions')[0];
-  createDropdown('Group', true, container);
-  createAndAppendAddBookButton(container);
-};
+const addBookForPreLoading = () => {
+  const divForPreloadAddBook = document.createElement('div');
+  divForPreloadAddBook.classList.add('add-Book');
+  divForPreloadAddBook.innerText = "The page is loading please wait.."
+}
 
 const showAddBookPopup = () => {
+  // setTimeout(function addBookPopup() {
   const children = [
     createInputWithLabel({
       text: 'Name',
@@ -285,11 +279,27 @@ const showAddBookPopup = () => {
       type: 'text',
     }),
   ];
-
   const popup = createPopup('Add new book', children, 'submit', () =>
     handleAddBookSubmission()
   );
   showPopup(popup);
+  // const divForPreloadAddBook = document.querySelector('.add-Book');
+  // divForPreloadAddBook.remove();
+  // },0);
+  // addBookForPreLoading();
+};
+
+const createAndAppendAddBookButton = parent => {
+  const text = 'Add new book';
+  const className = 'add-book-button';
+  const addBookButton = createButton(text, className, () => showAddBookPopup());
+  parent.appendChild(addBookButton);
+};
+
+const addHomePageActions = () => {
+  const container = document.getElementsByClassName('home-actions')[0];
+  createDropdown('Group', true, container);
+  createAndAppendAddBookButton(container);
 };
 
 const renderBookActionsPopup = bookId => {
@@ -341,6 +351,8 @@ const renderBook = (book, parent) => {
 
   parent.appendChild(bookContainer);
 };
+
+// display all books
 
 const renderGroupedBooks = (groupSelection) => {
   const groupedBooks = groupBooks(groupSelection);
@@ -402,6 +414,5 @@ const groupAndRenderBooks = (scrollToTop = false) => {
 };
 
 const render = () => {
-  addHomePageActions();
   groupAndRenderBooks();
 };
