@@ -225,14 +225,15 @@ const mainFunction = () => {
   const displayPopup = () => {
     const divForPopup = document.querySelector('.add-book');
     divForPopup.style.display = 'block';
-      setTimeout(function () {
-        divForPopup.style.display = 'none';
-      }, 2000);
+    setTimeout(function () {
+      divForPopup.style.display = 'none';
+    }, 2000);
   };
   const button = document.querySelector('.add-book-button');
   button.addEventListener('click', displayPopup);
   const dropDown = document.querySelector('.group-by-container');
   dropDown.addEventListener('click', displayPopup);
+  // button.removeEventListener('click', showAddBookPopup);
 }
 
 window.onload = mainFunction;

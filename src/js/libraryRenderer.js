@@ -43,11 +43,11 @@ const generateOrGetGenreColor = genre => {
   return color;
 };
 
-const createButton = (text, className, callback) => {
+const createButton = (text, className) => {
   const button = document.createElement('button');
   button.classList.add(className);
   button.innerText = text;
-  callback && button.addEventListener('click', callback);
+  // callback && button.addEventListener('click', callback);
   return button;
 };
 
@@ -280,7 +280,8 @@ const showAddBookPopup = () => {
 const createAndAppendAddBookButton = parent => {
   const text = 'Add new book';
   const className = 'add-book-button';
-  const addBookButton = createButton(text, className, () => showAddBookPopup());
+  // const addBookButton = createButton(text, className, () => showAddBookPopup());
+  const addBookButton = createButton(text, className);
   parent.appendChild(addBookButton);
 };
 
@@ -347,7 +348,7 @@ const renderGroupedBooks = (groupSelection) => {
   const grouped = Object.entries(groupedBooks);
   const booksContainer = document.getElementById('books');
   booksContainer.innerHTML = '';
-
+ 
   for (const [groupedOption, books] of grouped) {
     const fieldSet = document.createElement('fieldset');
     fieldSet.classList.add('books-group');
@@ -405,4 +406,6 @@ const render = () => {
   const divForPopup = document.querySelector('.add-book');
   divForPopup.remove();
   groupAndRenderBooks();
+  const button = document.querySelector('.add-book-button');
+  button.addEventListener('click',  showAddBookPopup());
 };
