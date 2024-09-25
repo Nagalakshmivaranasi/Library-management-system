@@ -235,7 +235,7 @@ const mainFunction = () => {
   const button = document.querySelector('.add-book-button');
   button.addEventListener('click', displayPopup);
   const dropDown = document.querySelector('.group-by-container');
-  dropDown.addEventListener('click', displayPopup);
+  dropDown.addEventListener('change', displayPopup);
   const form = document.querySelector('.popup-container');
   form.remove();
 }
