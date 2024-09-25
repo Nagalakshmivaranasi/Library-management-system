@@ -43,11 +43,11 @@ const generateOrGetGenreColor = genre => {
   return color;
 };
 
-const createButton = (text, className) => {
+const createButton = (text, className, callback) => {
   const button = document.createElement('button');
   button.classList.add(className);
   button.innerText = text;
-  // callback && button.addEventListener('click', callback);
+  callback && button.addEventListener('click', callback);
   return button;
 };
 
@@ -277,10 +277,20 @@ const showAddBookPopup = () => {
   showPopup(popup);
 };
 
+const show = () => {
+  setTimeout(function() {
+    const button = document.querySelectorAll('.add-book-button');
+    button[0].classList.add('book-button');
+    button[0].classList.remove('add-book-button');
+  }, 0)
+  const button1 = document.querySelectorAll('.book-button');
+  button1[0].addEventListener('click',  showAddBookPopup());
+}
+
 const createAndAppendAddBookButton = parent => {
   const text = 'Add new book';
   const className = 'add-book-button';
-  const addBookButton = createButton(text, className);
+  const addBookButton = createButton(text, className, () => show());
   parent.appendChild(addBookButton);
 };
 
@@ -405,6 +415,4 @@ const render = () => {
   const divForPopup = document.querySelector('.add-book');
   divForPopup.remove();
   groupAndRenderBooks();
-  const button = document.querySelector('.add-book-button');
-  button.addEventListener('click',  showAddBookPopup());
 };

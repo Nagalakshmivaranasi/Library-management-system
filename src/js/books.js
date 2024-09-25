@@ -207,7 +207,7 @@ let libraryRenderer;
 const preLoading = () => {
   const divForLoading = document.createElement('div');
   divForLoading.classList.add('loader-big');
-  divForLoading.innerText = "Loading..."
+  divForLoading.innerText = "Loading...";
   const mainTag = document.getElementById('main');
   mainTag.appendChild(divForLoading);
   return mainTag;
@@ -225,15 +225,19 @@ const mainFunction = () => {
   const displayPopup = () => {
     const divForPopup = document.querySelector('.add-book');
     divForPopup.style.display = 'block';
-    setTimeout(function () {
-      divForPopup.style.display = 'none';
-    }, 2000);
+    return new Promise(function(resolve){
+      setTimeout(function () {
+        divForPopup.style.display = 'none';
+        resolve();
+      }, 2000);
+    })
   };
   const button = document.querySelector('.add-book-button');
   button.addEventListener('click', displayPopup);
   const dropDown = document.querySelector('.group-by-container');
   dropDown.addEventListener('click', displayPopup);
-  // button.removeEventListener('click', showAddBookPopup);
+  const form = document.querySelector('.popup-container');
+  form.remove();
 }
 
 window.onload = mainFunction;
