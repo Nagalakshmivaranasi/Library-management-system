@@ -407,12 +407,12 @@ const groupAndRenderBooks = (scrollToTop = false) => {
   const groupSelection = groupDropdown.value;
 
   renderGroupedBooks(groupSelection);
-  renderLegends();
   scrollToTop && window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
 const render = () => {
   const divForPopup = document.querySelector('.add-book');
   divForPopup.remove();
+  renderLegends();
   groupAndRenderBooks();
 };
