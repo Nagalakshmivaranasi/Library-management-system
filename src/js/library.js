@@ -5,7 +5,9 @@ const getBook = id => {
 };
 
 const addBook = (name, publishedYear, genre, author, imageUrl, isAvailable) => {
-  const id = books.length + 1;
+const id = books.length > 0
+  ? Math.max(...books.map(b => b.id)) + 1
+  : 1;
   const book = {
     id,
     name,
@@ -37,13 +39,24 @@ const groupBooks = (groupSelection) => {
   return groupedBooks;
 };
 
-const load = booksCSVData => {
-  booksCSVData
-    .split('\n')
-    .slice(1)
-    .filter(line => line)
-    .forEach((line, index) => {
-      const [name, publishedYear, genre, author, imageUrl] = line.split(',');
-      addBook(name, publishedYear, genre, author, imageUrl, index % 2 == 0);
-    });
-};
+
+async function fetchBooks() {
+  const response = await fetch("http://127.0.0.1:8000/books");
+  const data = await response.json();
+
+  books.length = 0;        // clear old data
+  data.forEach(b => books.push(b)); // store API data
+
+  console.log("Books loaded:", books);
+}
+
+// const load = booksCSVData => {
+//   booksCSVData
+//     .split('\n')
+//     .slice(1)
+//     .filter(line => line)
+//     .forEach((line, index) => {
+//       const [name, publishedYear, genre, author, imageUrl] = line.split(',');
+//       addBook(name, publishedYear, genre, author, imageUrl, index % 2 == 0);
+//     });
+// };

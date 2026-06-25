@@ -213,31 +213,65 @@ const preLoading = () => {
   return mainTag;
 }
 
-const mainFunction = () => {
+const mainFunction = async () => {
   preLoading();
   addHomePageActions();
-  setTimeout(function main() {
-    load(booksCSVData);
-    render();
-    const divForLoading = document.querySelector('.loader-big');
-    divForLoading.remove();
-  }, 5000);
+
+  await fetchBooks();
+
+  render();
+  const divForLoading = document.querySelector('.loader-big');
+  divForLoading.remove();
+
   const displayPopup = () => {
     const divForPopup = document.querySelector('.add-book');
     divForPopup.style.display = 'block';
-    return new Promise(function(resolve){
+
+    return new Promise(function(resolve) {
       setTimeout(function () {
         divForPopup.style.display = 'none';
         resolve();
       }, 2000);
-    })
+    });
   };
+
   const button = document.querySelector('.add-book-button');
   button.addEventListener('click', displayPopup);
+
   const dropDown = document.querySelector('.group-by-container');
   dropDown.addEventListener('change', displayPopup);
+
   const form = document.querySelector('.popup-container');
-  form.remove();
-}
+  if (form) form.remove();
+};
 
 window.onload = mainFunction;
+// const mainFunction = () => {
+//   preLoading();
+//   addHomePageActions();
+//   setTimeout(function main() {
+//     load(booksCSVData);
+//     render();
+//     const divForLoading = document.querySelector('.loader-big');
+//     divForLoading.remove();
+//   }, 5000);
+
+//   const displayPopup = () => {
+//     const divForPopup = document.querySelector('.add-book');
+//     divForPopup.style.display = 'block';
+//     return new Promise(function(resolve){
+//       setTimeout(function () {
+//         divForPopup.style.display = 'none';
+//         resolve();
+//       }, 2000);
+//     })
+//   };
+//   const button = document.querySelector('.add-book-button');
+//   button.addEventListener('click', displayPopup);
+//   const dropDown = document.querySelector('.group-by-container');
+//   dropDown.addEventListener('change', displayPopup);
+//   const form = document.querySelector('.popup-container');
+//   form.remove();
+// }
+
+// window.onload = mainFunction;
