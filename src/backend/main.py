@@ -9,7 +9,21 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-@app.get("/books")
+@app.get("/search")
+def search_books(query: str):
+
+    df = pd.read_csv(
+        "../data/books.csv",
+        on_bad_lines="skip"
+    )
+    df = df.fillna("")
+    df = df.astype(str)
+
+    result = df[
+        df["Name"].str.contains(query, case=False, na=False)
+    ]
+
+    return result.to_dict(orient="records")
 @app.get("/books")
 def get_books():
 
@@ -20,7 +34,7 @@ def get_books():
 
     df = df.fillna("")
     df = df.astype(str)
-
-    return df.to_dict(
+    print(df.columns.tolist())
+    return df.head(100).to_dict(
         orient="records"
     )

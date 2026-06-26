@@ -37,7 +37,7 @@ const getDarkColor = () => {
 };
 
 const generateOrGetGenreColor = genre => {
-  const genreLowerCase = genre.toLowerCase();
+  const genreLowerCase = genre?.toLowerCase();
   const color = genreToColor[genreLowerCase] || getDarkColor();
   genreToColor[genreLowerCase] = color;
   return color;
