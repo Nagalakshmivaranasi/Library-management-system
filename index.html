@@ -1,28 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <script src="./src/js/library.js"></script>
-    <script src="./src/js/libraryRenderer.js"></script>
-    <script src="./src/js/books.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="./src/styles/books.css">
-  </head>
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="./src/styles/books.css">
+</head>
 
-  <body>
-    <header>
-      <div id="header">
-        <h1>Library</h1>
-        <div class="home-actions"></div>
+<body>
+  <header>
+    <div id="header">
+      <h1>Library</h1>
+      <div class="home-actions"></div>
+      <div class="search-container">
+        <i class="fa-solid fa-magnifying-glass" id="searchIcon"></i>
+        <input type="text" id="searchInput" placeholder="Search books..." class="hidden">
       </div>
-      <div id="legends"></div>
-      </div>
-    </header>
-    <main id="main">
-      <div class="add-book">The page is loading please wait..</div>
-      <div id="books"></div>
-    </main>
-    <div class="popup-container"></div>
-  </body>
+    </div>
+    <div id="legends"></div>
+    </div>
+  </header>
+  <main id="main">
+    <div class="add-book">The page is loading please wait..</div>
+    <div id="books"></div>
+  </main>
+  <div class="popup-container"></div>
+  <script src="./src/js/library.js"></script>
+  <script src="./src/js/libraryRenderer.js"></script>
+  <script src="./src/js/books.js"></script>
+</body>
 
 </html>

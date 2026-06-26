@@ -35,6 +35,6 @@ def get_books():
     df = df.fillna("")
     df = df.astype(str)
     print(df.columns.tolist())
-    return df.head(100).to_dict(
+    return df.head(500).to_dict(
         orient="records"
     )

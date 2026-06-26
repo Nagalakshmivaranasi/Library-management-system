@@ -284,7 +284,7 @@ const show = () => {
     button[0].classList.remove('add-book-button');
   }, 0)
   const button1 = document.querySelectorAll('.book-button');
-  button1[0].addEventListener('click',  showAddBookPopup());
+  button1[0].addEventListener('click',  showAddBookPopup);
 }
 
 const createAndAppendAddBookButton = parent => {

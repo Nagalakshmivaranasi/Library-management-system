@@ -5,9 +5,9 @@ const getBook = id => {
 };
 
 const addBook = (name, publishedYear, genre, author, imageUrl, isAvailable) => {
-const id = books.length > 0
-  ? Math.max(...books.map(b => b.id)) + 1
-  : 1;
+  const id = books.length > 0
+    ? Math.max(...books.map(b => b.id)) + 1
+    : 1;
   const book = {
     id,
     name,
@@ -39,16 +39,7 @@ const groupBooks = (groupSelection) => {
   return groupedBooks;
 };
 
-async function fetchBooks() {
-  const response = await fetch("http://127.0.0.1:8000/books");
-  const data = await response.json();
-
-  const searchResponse = await fetch(
-  `http://127.0.0.1:8000/search?query=${searchText}`
-);
-
-const searchData = await searchResponse.json();
-
+function loadBooks(data) {
   books.length = 0;
 
   data.forEach((b, index) => {
@@ -62,9 +53,51 @@ const searchData = await searchResponse.json();
       isAvailable: true
     });
   });
+}
 
+async function fetchBooks() {
+  const response = await fetch("http://127.0.0.1:8000/books");
+  const data = await response.json();
+
+  books.length = 0;
+
+  loadBooks(data);
   console.log(books[0]);
 }
+
+async function searchBooks() {
+  const searchText = document.getElementById("searchInput").value;
+
+  const response = await fetch(
+    `http://127.0.0.1:8000/search?query=${encodeURIComponent(searchText)}`
+  );
+  const data = await response.json();
+  books.length = 0;
+  console.log(data);
+  loadBooks(data);
+  groupAndRenderBooks();
+
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const icon = document.getElementById("searchIcon");
+  const input = document.getElementById("searchInput");
+
+  if (icon && input) {
+    icon.addEventListener("click", () => {
+      input.classList.toggle("show");
+      input.focus();
+    });
+
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        searchBooks();
+      }
+    });
+  }
+
+});
+
 // const load = booksCSVData => {
 //   booksCSVData
 //     .split('\n')
