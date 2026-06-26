@@ -43,6 +43,12 @@ async function fetchBooks() {
   const response = await fetch("http://127.0.0.1:8000/books");
   const data = await response.json();
 
+  const searchResponse = await fetch(
+  `http://127.0.0.1:8000/search?query=${searchText}`
+);
+
+const searchData = await searchResponse.json();
+
   books.length = 0;
 
   data.forEach((b, index) => {
